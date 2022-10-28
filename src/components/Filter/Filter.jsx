@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Input, P } from 'components/Style/Element.styled';
 
 export const Filter = ({ title }) => (
@@ -12,3 +13,7 @@ export const Filter = ({ title }) => (
     />
   </div>
 );
+
+Filter.propTypes = {
+  title: PropTypes.string.isRequired,
+};

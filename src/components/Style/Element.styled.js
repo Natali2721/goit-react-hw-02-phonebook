@@ -25,21 +25,27 @@ const P = styled.p`
   font-size: ${p => p.theme.fontSizes.m};
   padding-top: 0px;
   padding-bottom: 0px;
-  margin-top: ${p => p.theme.space[0]}px;
+  margin: 0px;
+  margin-top: ${p => p.theme.space[2]}px;
+  margin-bottom: ${p => p.theme.space[3]}px;
 `;
 
-const Warning = styled.p`
-  color: ${p => p.theme.colors.tomato};
-  font-size: ${p => p.theme.fontSizes.l};
-  font-family: ${p => p.theme.fonts.body};
-  padding-top: ${p => p.theme.space[4]}px;
-  padding-bottom: ${p => p.theme.space[3]}px;
+const Input = styled.input`
+  font-size: ${p => p.theme.fontSizes.s};
 `;
 
+const Form = styled.form`
+  width: 300px;
+  border: 1px black solid;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+`;
 const Button = styled.button`
   padding: 10px 15px;
-  margin-right: 10px;
-  font-size: 24px;
+  margin-right: auto;
+  margin-top: ${p => p.theme.space[4]}px;
+  font-size: 16px;
   background-color: transparent;
   border: 1px black solid;
   border-radius: 10px;
@@ -48,18 +54,31 @@ const Button = styled.button`
   transition: background-color 250ms linear;
   &:hover {
     color: white;
-  }
-  &.good:hover {
-    background-color: green;
-    border-color: green;
-  }
-  &.bad:hover {
-    background-color: tomato;
-    border-color: tomato;
-  }
-  &.neutral:hover {
-    background-color: #ffd800;
-    border-color: #ffd800;
+    background-color: blue;
   }
 `;
-export { Title, P, Warning, Button, TitleSecond };
+
+const ContactItem = styled.li`
+  display: flex;
+  align-items: baseline;
+`;
+const ContactTxt = styled.p`
+  margin: 0 15px;
+  font-size: 16px;
+`;
+const Contacts = styled.ul`
+  padding: 0px;
+  list-style: none;
+`;
+
+export {
+  Title,
+  TitleSecond,
+  P,
+  Form,
+  Button,
+  Input,
+  ContactItem,
+  Contacts,
+  ContactTxt,
+};

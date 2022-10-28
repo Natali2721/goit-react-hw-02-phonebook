@@ -1,22 +1,37 @@
+import {
+  Button,
+  ContactItem,
+  Contacts,
+  ContactTxt,
+} from 'components/Style/Element.styled';
+import { FaUserAlt } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
 export const ContactList = ({ contacts }) => {
   return (
-    <ul>
+    <Contacts>
       {contacts.map(({ name, number, id }) => {
         return (
-          <li key={id}>
-            <p>
+          <ContactItem key={id}>
+            <FaUserAlt />
+            <ContactTxt>
               {name} : {number}
-            </p>
-          </li>
+            </ContactTxt>
+            <Button
+              //onClickDelete={() => onClickDelete(contact.id)}
+              id={id}
+            >
+              Delete
+            </Button>
+          </ContactItem>
         );
       })}
-    </ul>
+    </Contacts>
   );
 };
 
 ContactList.propTypes = {
+  // onClickDelete: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
       name: PropTypes.string.isRequired,

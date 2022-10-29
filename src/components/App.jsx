@@ -12,7 +12,9 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
-
+  reset = () => {
+    this.setState({ filter: '' });
+  };
   handleChange = e => {
     const { name, value } = e.currentTarget;
     this.setState({
@@ -41,15 +43,11 @@ export class App extends Component {
     });
   };
 
-  // reset = e => {
-  //   let a = e.currentTarget.value;
-  //   a = '';
-  // };
-
   onClickDelete = id => {
     this.setState({
       contacts: this.state.contacts.filter(contact => contact.id !== id),
     });
+    this.reset();
   };
 
   render() {

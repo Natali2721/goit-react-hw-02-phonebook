@@ -4,6 +4,8 @@ import { Box } from './Box/Box';
 import { H1, H2 } from './Title/Title';
 import { ContactList } from './ContactList/ContactList';
 import Phonebook from './Phonebook/Phonebook';
+import { Filter } from './Filter/Filter';
+import { P } from './Style/Element.styled';
 
 export class App extends Component {
   state = {
@@ -20,13 +22,13 @@ export class App extends Component {
 
   formSubmit = data => {
     const id = nanoid();
-    // if (
-    //   this.state.contacts.filter(contact => contact.name === data.name).length >
-    //   0
-    // ) {
-    //  alert(`${data.name} is already in contacts`);
-    //  return;
-    //}
+    if (
+      this.state.contacts.filter(contact => contact.name === data.name).length >
+      0
+    ) {
+      alert(`${data.name} is already in contacts`);
+      return;
+    }
     this.setState({
       contacts: [
         ...this.state.contacts,
@@ -39,6 +41,11 @@ export class App extends Component {
     });
   };
 
+  // reset = e => {
+  //   let a = e.currentTarget.value;
+  //   a = '';
+  // };
+
   onClickDelete = id => {
     this.setState({
       contacts: this.state.contacts.filter(contact => contact.id !== id),
@@ -46,17 +53,31 @@ export class App extends Component {
   };
 
   render() {
-    //const normolizeFilter = this.state.filter.toLowerCase();
-    // const visibleContacts = this.state.contacts.filter(contact =>
-    //   contact.name.toLowerCase().includes(normolizeFilter)
-    //);
+    const filterValueNormolize = this.state.filter.toLowerCase();
+    const contactsToShow = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filterValueNormolize)
+    );
     return (
       <Box as="main" px={5}>
         <H1 title="Phonebook" />
         <Phonebook onChange={this.handleChange} onSubmit={this.formSubmit} />
-        <H2 title="Contacts" />
-
-        <ContactList contacts={this.state.contacts} />
+        {this.state.contacts.length > 0 ? (
+          <>
+            <H2 title="Contacts" />
+            <Filter
+              title="Find contact by name"
+              onChange={this.handleChange}
+              value={this.state.filter}
+            />
+            <ContactList
+              //contacts={this.state.contacts}
+              contacts={contactsToShow}
+              onClickDelete={this.onClickDelete}
+            />
+          </>
+        ) : (
+          <P>Phonebook is empty</P>
+        )}
       </Box>
     );
   }

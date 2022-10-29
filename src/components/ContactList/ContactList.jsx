@@ -7,7 +7,13 @@ import {
 import { FaUserAlt } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = ({ contacts, onClickDelete }) => {
+  const BtnDelete = ({ onClickDelete, id }) => (
+    <Button type="button" onClick={onClickDelete} id={id}>
+      Delete
+    </Button>
+  );
+
   return (
     <Contacts>
       {contacts.map(({ name, number, id }) => {
@@ -17,12 +23,11 @@ export const ContactList = ({ contacts }) => {
             <ContactTxt>
               {name} : {number}
             </ContactTxt>
-            <Button
-              //onClickDelete={() => onClickDelete(contact.id)}
+            <BtnDelete
+              name="Delete"
+              onClickDelete={() => onClickDelete(id)}
               id={id}
-            >
-              Delete
-            </Button>
+            />
           </ContactItem>
         );
       })}
@@ -31,7 +36,7 @@ export const ContactList = ({ contacts }) => {
 };
 
 ContactList.propTypes = {
-  // onClickDelete: PropTypes.func.isRequired,
+  onClickDelete: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
       name: PropTypes.string.isRequired,
